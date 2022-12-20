@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://duugmnauemcc7"]
+[gd_scene load_steps=14 format=3 uid="uid://duugmnauemcc7"]
 
 [ext_resource type="PackedScene" uid="uid://c0vnqt6uyxaoa" path="res://player/Player.tscn" id="1"]
+[ext_resource type="Script" path="res://Main.gd" id="1_q34sn"]
 [ext_resource type="Material" uid="uid://cb6br3g0cy6c1" path="res://assets/materials/Grass.tres" id="1_ugafu"]
 [ext_resource type="Material" uid="uid://c560kh0cq42t2" path="res://assets/materials/Concrete.tres" id="2_4xuie"]
 [ext_resource type="Material" uid="uid://cotjsbb4imdui" path="res://assets/materials/Wood.tres" id="3_tqk2n"]
@@ -32,6 +33,7 @@ size = Vector3(25, 11, 19)
 size = Vector3(25.7228, 10, 17.671)
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_q34sn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("2")
@@ -91,3 +93,8 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Water"]
 shape = SubResource("8")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+use_threads = true
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
